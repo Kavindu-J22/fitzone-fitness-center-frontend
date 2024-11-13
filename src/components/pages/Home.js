@@ -1,26 +1,31 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useContext } from 'react';
+import { AuthContext } from '../context/AuthContext';
+import { Link, useNavigate } from 'react-router-dom';
 
 const Home = () => {
-  return (
-    <div>
-      <header>
-        <h1>Welcome to FitZone Fitness Center</h1>
-        <p>Your journey to fitness starts here. Join us today!</p>
-        <Link to="/memberships">Explore Our Membership Plans</Link>
-        <Link to="/classes">Browse Fitness Classes</Link>
-      </header>
+    const { user, logout } = useContext(AuthContext);
+    const navigate = useNavigate();
 
-      <section>
-        <h2>Our Services</h2>
-        <ul>
-          <li>Personal Training</li>
-          <li>Group Fitness Classes</li>
-          <li>Nutrition Guidance</li>
-        </ul>
-      </section>
-    </div>
-  );
+    const handleLogout = () => {
+        logout();
+        navigate('/');
+    };
+
+    return (
+        <div>
+            <h1>Welcome to FitZone Fitness Center</h1>
+            {user ? (
+                <>
+                    <button onClick={handleLogout}>Logout</button>
+                    {user.role === 'admin' && <Link to="/admin-dashboard">Admin Dashboard</Link>}
+                    {user.role === 'staff' && <Link to="/staff-dashboard">Staff Dashboard</Link>}
+                    {user.role === 'customer' && <Link to="/customer-dashboard">Customer Dashboard</Link>}
+                </>
+            ) : (
+                <Link to="/login">Login</Link>
+            )}
+        </div>
+    );
 };
 
 export default Home;

@@ -1,16 +1,13 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 
-const StaffDashboard = () => {
-  return (
-    <div>
-      <h1>Staff Dashboard</h1>
-      <div>
-        <Link to="/bookings">Manage Bookings</Link>
-        <Link to="/queries">View and Respond to Queries</Link>
-      </div>
-    </div>
-  );
+const CustomerDashboard = () => {
+    return (
+        <div>
+            <h2>Customer Dashboard</h2>
+            <p>Welcome to your dashboard. View your fitness journey and manage memberships here.</p>
+            {/* Add more customer-specific functionalities here */}
+        </div>
+    );
 };
 
-export default StaffDashboard;
+export default CustomerDashboard;

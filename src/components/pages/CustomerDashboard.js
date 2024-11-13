@@ -1,17 +1,22 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useContext } from 'react';
+import { AuthContext } from '../context/AuthContext';
+import { useNavigate } from 'react-router-dom';
 
-const CustomerDashboard = () => {
+
+  const CustomerDashboard = () => {
+    const { logout } = useContext(AuthContext);
+    const navigate = useNavigate();
+
+    const handleLogout = () => {
+        logout();
+        navigate('/');
+    };
   return (
     <div>
-      <h1>Welcome to Your Dashboard</h1>
-      <div>
-        <Link to="/classes">View and Book Classes</Link>
-        <Link to="/memberships">Check Membership Plans</Link>
-        <Link to="/profile">Update Your Profile</Link>
-      </div>
+      <h2>Customer Dashboard</h2>
+      <button onClick={handleLogout}>Logout</button>
     </div>
   );
-};
+}
 
 export default CustomerDashboard;

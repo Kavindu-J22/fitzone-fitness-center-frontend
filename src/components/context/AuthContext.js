@@ -1,38 +1,36 @@
-import React, { createContext, useState, useEffect, useContext } from 'react';
+// src/context/AuthContext.js
+import React, { createContext, useState } from 'react';
 
-// Create context
 export const AuthContext = createContext();
 
-// Custom hook to use auth context
-export const useAuth = () => {
-  return useContext(AuthContext);
-};
-
-// AuthProvider component that wraps your app
 export const AuthProvider = ({ children }) => {
-  const [authToken, setAuthToken] = useState(null);
+    const [user, setUser] = useState(null);
 
-  // Check if token is available in localStorage on initial load
-  useEffect(() => {
-    const token = localStorage.getItem('token');
-    if (token) {
-      setAuthToken(token);
-    }
-  }, []);
+    const login = async (username, password) => {
+        // Replace with actual API call and token storage
+        const response = await fetch('http://localhost:5000/api/auth/login', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ username, password }),
+        });
+        const data = await response.json();
+        
+        if (data.user) {
+            setUser(data.user); // Set the user state based on response data
+            localStorage.setItem('token', data.token);
+        } else {
+            throw new Error('Login failed');
+        }
+    };
 
-  const login = (token) => {
-    setAuthToken(token);
-    localStorage.setItem('token', token); // Store token in localStorage
-  };
+    const logout = () => {
+        setUser(null);
+        localStorage.removeItem('token');
+    };
 
-  const logout = () => {
-    setAuthToken(null);
-    localStorage.removeItem('token'); // Remove token from localStorage
-  };
-
-  return (
-    <AuthContext.Provider value={{ authToken, login, logout }}>
-      {children}
-    </AuthContext.Provider>
-  );
+    return (
+        <AuthContext.Provider value={{ user, login, logout }}>
+            {children}
+        </AuthContext.Provider>
+    );
 };
