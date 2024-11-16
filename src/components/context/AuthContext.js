@@ -14,10 +14,15 @@ export const AuthProvider = ({ children }) => {
             body: JSON.stringify({ username, password }),
         });
         const data = await response.json();
+
+        console.log(data);
         
         if (data.user) {
             setUser(data.user); // Set the user state based on response data
             localStorage.setItem('token', data.token);
+            localStorage.setItem('username', data.user.username); // Store username
+            localStorage.setItem('userId', data.user.id); // Store user ID
+            localStorage.setItem('role', data.user.role);
         } else {
             throw new Error('Login failed');
         }
@@ -26,6 +31,9 @@ export const AuthProvider = ({ children }) => {
     const logout = () => {
         setUser(null);
         localStorage.removeItem('token');
+        localStorage.removeItem('username'); // Remove username from localStorage
+        localStorage.removeItem('userId'); // Remove user ID from localStorage
+        localStorage.removeItem('role');
     };
 
     return (
