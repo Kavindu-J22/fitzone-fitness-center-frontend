@@ -3,7 +3,7 @@ import React  from 'react';
 
 const AdminDashboard = () => {
     return (
-        <div>
+        <div className='pagelist'>
             <h2>Admin Dashboard</h2>
             <a href='/addStaff'>Manage Staff</a>
             <a href='/membermanage'>Payments and Manage Members</a>

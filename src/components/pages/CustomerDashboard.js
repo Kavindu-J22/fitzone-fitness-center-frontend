@@ -18,16 +18,15 @@ import { useNavigate } from 'react-router-dom';
   };
 
   return (
-    <div>
+    <div className='pagelist'>
       <h2>Customer Dashboard</h2>
-      <button onClick={handleLogout}>Logout</button>
       <a href='/memberships'>Memberships</a>
       <a href='/submitQuerie'>Submit Queries</a>
       <a href='/classList'>Class And Trainings</a>
       <a href='/personalTrainers'>Personal Trainers and Request an appointment</a>
       <a href='/myPayments'>My Payments</a>
       <a href='/myBookings'>My Bookings</a>
-        <div>
+        <div className='pagelist'>
           <h2>Contents</h2>
           <button onClick={() => handleNavigation('Other')}>Other contents</button>
           <button onClick={() => handleNavigation('Blog Post')}>Blog Post</button>
@@ -36,6 +35,7 @@ import { useNavigate } from 'react-router-dom';
           <button onClick={() => handleNavigation('Success Stories')}>Success Stories</button>
           <button onClick={() => handleNavigation('Workout Routines')}>Workout Routines</button>
       </div>
+      <button onClick={handleLogout}>Logout</button>
     </div>
   );
 }

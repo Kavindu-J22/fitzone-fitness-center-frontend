@@ -27,6 +27,7 @@ import Contentmanagement from './components/Staff/ContentManagement';
 import AdminContentmanagement from './components/Admin/ContentManagement';
 import ExploreContent from './components/Customer/ExploreContent';
  import AllBookings from './components/Admin/AllBookings.js';
+ import './index.css'
 
 function App() {
     const { user } = useContext(AuthContext);
@@ -40,14 +41,8 @@ function App() {
                 <Route path="/register" element={<Register />} />
                 <Route
                     path="/admin-dashboard"
-                    element={
-                        localStorage.getItem('username') === 'admin' ? (
-                        <AdminDashboard />
-                        ) : (
-                        <Navigate to="/login" />
-                        )
-                    }
-                    />
+                    element={user?.role === 'admin' ? <AdminDashboard /> : <Navigate to="/login" />}
+                />
                 <Route
                     path="/staff-dashboard"
                     element={user?.role === 'staff' ? <StaffDashboard /> : <Navigate to="/login" />}

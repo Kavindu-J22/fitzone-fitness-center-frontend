@@ -2,7 +2,7 @@ import React from 'react';
 
 const CustomerDashboard = () => {
     return (
-        <div>
+        <div className='pagelist'>
             <h2>staff Dashboard</h2>
             <p>Welcome to your dashboard. View your fitness journey and manage memberships here.</p>
             <a href='/manageQuerie'>Manage Queries</a>
